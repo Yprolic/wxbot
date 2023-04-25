@@ -11,15 +11,14 @@ from wxcloudrun.response import make_succ_empty_response, make_succ_response, ma
 logger = logging.getLogger('log')
 
 
-@app.route('/send/msg', methods=['POST'])
+@app.route('/send/msg', methods=['POST', 'GET'])
 def send_msg():
     """
     :return:计数结果/清除结果
     """
-
     # 获取请求体参数
     params = request.get_json()
-    logger.info("GetMsg {0}, {1}".format(params, params.get('Content')))
+    app.logger.info("GetMsg {0}, {1}".format(params, params.get('Content')))
     return make_succ_response({
         "ToUserName": params.get('FromUserName'),
         "FromUserName": params.get('ToUserName'),
