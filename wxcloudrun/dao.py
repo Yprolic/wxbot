@@ -3,7 +3,7 @@ import logging
 from sqlalchemy.exc import OperationalError
 
 from wxcloudrun import db
-from wxcloudrun.model import Counters
+from wxcloudrun.model import Counters, Jhscard
 
 # 初始化日志
 logger = logging.getLogger('log')
@@ -17,6 +17,19 @@ def query_counterbyid(id):
     """
     try:
         return Counters.query.filter(Counters.id == id).first()
+    except OperationalError as e:
+        logger.info("query_counterbyid errorMsg= {} ".format(e))
+        return None
+
+
+def query_jhs_card_byname(name):
+    """
+    根据ID查询Counter实体
+    :param id: Counter的ID
+    :return: Counter实体
+    """
+    try:
+        return Jhscard.query.filter(Jhscard.name == name).first()
     except OperationalError as e:
         logger.info("query_counterbyid errorMsg= {} ".format(e))
         return None
