@@ -53,7 +53,7 @@ def send_msg():
     jhs_card = query_jhs_card_byname(query)
     app.logger.info("Select {0}, {1}".format(jhs_card, query))
     if not jhs_card:
-        answer = '对不起，没找到对应的卡'
+        answer = u'对不起，没找到对应的卡'
     else:
         answer = format_price_resp(get_price(jhs_card.card_version_id))
         app.logger.info("Answer {0}".format(answer))
