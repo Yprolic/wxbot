@@ -34,7 +34,9 @@ def get_price(card_version_id):
         'game_sub_key': 'sc',
 		'page':          1,
     }
-    return requests.get(url, params=params).json()
+    resp = requests.get(url, params=params)
+    app.logger.info("search {0}, {1}".format(card_version_id, resp))
+    return resp.json()
 
 @app.route('/send/msg', methods=['POST', 'GET'])
 def send_msg():
@@ -44,9 +46,10 @@ def send_msg():
     jhs_card = query_jhs_card_byname(query)
     app.logger.info("Select {0}, {1}".format(jhs_card, query))
     if not jhs_card:
-        answer = '对不起，没找到对应的卡'
+        answer = u'对不起，没找到对应的卡'
     else:
         answer = json.dumps(get_price(jhs_card.card_version_id),ensure_ascii=False)
+        app.logger.info("Answer {0}".format(answer))
     msg = {
         "ToUserName": params.get('FromUserName'),
         "FromUserName": params.get('ToUserName'),
