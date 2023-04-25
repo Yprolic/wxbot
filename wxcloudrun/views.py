@@ -4,11 +4,10 @@ import time
 from datetime import datetime
 from flask import render_template, request
 from run import app
-from response import json_response
 from wxcloudrun.dao import delete_counterbyid, query_counterbyid, insert_counter, update_counterbyid, \
     query_jhs_card_byname
 from wxcloudrun.model import Counters
-from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
+from wxcloudrun.response import json_response
 
 # 初始化日志
 logger = logging.getLogger('log')
