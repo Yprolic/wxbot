@@ -23,4 +23,5 @@ def send_msg():
     #   "MsgType": "text",
     #   "Content": "文本消息"
     # }
-    return
+    return make_succ_response("123")
+
