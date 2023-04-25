@@ -19,7 +19,8 @@ def send_msg():
     app.logger.info("GetMsg {0}, {1}".format(params, params.get('Content')))
     query = params.get('Content')
     x = query_jhs_card_byname(query)
-    answer = json.dumps(x)
+    app.logger.info("Select {0}, {1}".format(x, query))
+    answer = str(x.card_version_id)
     msg = {
         "ToUserName": params.get('FromUserName'),
         "FromUserName": params.get('ToUserName'),
