@@ -4,6 +4,8 @@ import pymysql
 import config
 
 # 因MySQLDB不支持Python3，使用pymysql扩展库代替MySQLDB库
+from wxcloudrun.dao import get_hot100_card_names
+
 pymysql.install_as_MySQLdb()
 
 # 初始化web应用
@@ -22,3 +24,6 @@ from wxcloudrun import views
 
 # 加载配置
 app.config.from_object('config')
+
+# 加载hot 200卡片名称
+hot_names = get_hot100_card_names()
