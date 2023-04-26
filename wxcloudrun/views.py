@@ -37,7 +37,7 @@ def get_price(card_version_id):
 def format_price_resp(r):
     top10price = []
     for d in r.get('data'):
-        top10price.append(str(int(d.get('min_price'))))
+        top10price.append(str(int(float(d.get('min_price')))))
     return '总挂单量为:{0}\n前10挂单分别为:{1}'.format(r.get('total'), ','.join(top10price))
 
 
