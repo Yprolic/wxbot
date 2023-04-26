@@ -7,8 +7,7 @@ from thefuzz import process
 from datetime import datetime
 from flask import render_template, request
 from run import app
-from wxcloudrun import hot_names
-from wxcloudrun.dao import query_jhs_card_byname
+from wxcloudrun.dao import query_jhs_card_byname, get_hot100_card_names
 from wxcloudrun.response import json_response
 
 # 初始化日志
@@ -50,7 +49,7 @@ def send_msg():
     jhs_card = query_jhs_card_byname(query)
     app.logger.info("Select {0}, {1}".format(jhs_card, query))
     if not jhs_card:
-        match_card, score = process.extractOne("月布达克莱伊", hot_names)
+        match_card, score = process.extractOne(query, get_hot100_card_names())
         if score < 0.5:
             answer = u'对不起，没找到对应的卡'
         else:

@@ -17,8 +17,14 @@ def query_jhs_card_byname(name):
         return None
 
 
+hot_names = None
+
+
 def get_hot100_card_names():
-    choices = []
+    global hot_names
+    if hot_names:
+        return hot_names
+    hot_names = []
     for card in Jhscard.select().order_by(Jhscard.init_price.desc()).limit(200):
-        choices.append([card.name, card.card_version_id])
-    return choices
+        hot_names.append([card.name, card.card_version_id])
+    return hot_names
