@@ -25,6 +25,6 @@ def get_hot100_card_names():
     if hot_names:
         return hot_names
     hot_names = []
-    for card in Jhscard.select().order_by(Jhscard.init_price.desc()).limit(200):
+    for card in Jhscard.query.order_by(Jhscard.init_price.desc()).limit(200).all():
         hot_names.append([card.name, card.card_version_id])
     return hot_names
